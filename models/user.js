@@ -2,7 +2,9 @@
 const { verify } = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-// Definir el esquema del modelo de usuario
+
+// Este esquema define la estructura de los documentos de usuario en la base de datos
+// new mongoose.Schema crea un nuevo esquema de Mongoose
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -11,6 +13,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    todos: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Todo',
+            required: true
+        }]
 });
 
 // Método para verificar el token de acceso
