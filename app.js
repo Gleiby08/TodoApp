@@ -1,6 +1,5 @@
 //importar modulos
 require('dotenv').config();
-const { MONGO_URI } = require('./config');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -14,18 +13,6 @@ const todosRouter = require('./controllers/todos'); // <-- 1. Importa el router 
 const logoutRouter = require('./controllers/logout');
 const { userExtractor } = require('./Middleware/auth');
 
-//conexion a la base de datos
-//mongoose.connect (es un metodo de moongose): conecta a la base de datos MongoDB usando la URI de prueba
-(async () => {
-    try {
-        // Conectar a la base de datos MongoDB usando la URI de prueba
-        await mongoose.connect(MONGO_URI);
-        console.log('conectado a mongo DB');
-    } catch (error) {
-        console.error(error);
-    }
-})();
-
 //Configuracion de express
 //app.use (es un metodo de express): configura la aplicacion para que use los siguientes middlewares
 //cors (es un middleware de express permite que tu aplicación frontend (la página web donde se registran e inician sesión acceda a tu API backend que maneja los registros y los inicios de sesión 
@@ -38,7 +25,7 @@ app.use(cookieParser());
 app.use('/', express.static(path.resolve('views', 'home')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
-app.use('/todos', express.static(path.resolve('views', 'todos'))); // <-- 2. Corrige la ruta duplicada
+app.use('/todos', express.static(path.resolve('views', 'todos'))); 
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/images', express.static(path.resolve('img')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));

@@ -1,13 +1,27 @@
 //importar modulos
 const app = require('./app');
 const http = require('http');
+const mongoose = require('mongoose');
+const { MONGO_URI } = require('./config');
 
-// Crear un servidor HTTP
-//http.createServer (es un metodo de la libreria http): crea un servidor HTTP que escucha las peticiones del cliente
-const server = http.createServer(app);
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Iniciar el servidor
-server.listen(PORT, () => {
-    console.log('El servidor esta corriendo');
-});
+const startServer = async () => {
+  try {
+    console.log('Conectando a la base de datos...');
+    await mongoose.connect(MONGO_URI);
+    console.log('Conectado a MongoDB');
+
+    const server = http.createServer(app);
+
+    server.listen(PORT, () => {
+      console.log(`El servidor está corriendo en el puerto ${PORT}`);
+    });
+  } catch (error) {
+    console.error('No se pudo conectar a la base de datos. La aplicación no se iniciará.');
+    console.error(error.message);
+    process.exit(1); // Termina el proceso si la conexión falla
+  }
+};
+
+startServer();

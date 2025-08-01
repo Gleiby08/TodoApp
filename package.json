@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
+    "start": " cross-env NODE_ENV=production node index.js",
     "tailwind-build": "npx tailwindcss -i ./input.css -o ./views/styles/output.css --watch",
-    "dev": "cross-env NODE_ENV=dev nodemon index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mariana G",
@@ -20,7 +20,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.18.0",
     "mongoose": "^8.16.3",
-    "moongose": "^1.0.0",
     "morgan": "^1.10.0",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.9"
